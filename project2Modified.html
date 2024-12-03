@@ -1,8 +1,8 @@
 <doctype html>
 	<html>
 	<head>
-	<title>CS 405 - Project 2 Task 3</title>
-	<script type="text/javascript" id="includedscript" src="project2.js"></script>
+	<title>CS 405 - Project 2 Task 4</title>
+	<script type="text/javascript" id="includedscript" src="project2Task4.js"></script>
 	<script type="text/javascript" src="obj.js"></script>
 	
 	<script type="text/javascript">
@@ -335,9 +335,29 @@
 			reader.onload = function(e) {
 				var img = new Image();
 				img.src = e.target.result;
-				document.getElementById('texture-img').src = e.target.result;
+				document.getElementById('texture-img1').src = e.target.result;
 				img.onload = function() {
-					meshDrawer.setTexture( img );
+					meshDrawer.setTexture( img, 0 );
+					DrawScene();
+				}
+				console.log(param.files[0])
+			};
+			reader.readAsDataURL( param.files[0] );
+		}
+		meshDrawer.showTexture( true );
+		DrawScene();
+	}
+
+	function LoadTexture2( param )
+	{
+		if ( param.files && param.files[0] ) {
+			var reader = new FileReader();
+			reader.onload = function(e) {
+				var img = new Image();
+				img.src = e.target.result;
+				document.getElementById('texture-img2').src = e.target.result;
+				img.onload = function() {
+					meshDrawer.setTexture( img, 1 );
 					DrawScene();
 				}
 				console.log(param.files[0])
@@ -405,7 +425,11 @@
 			margin-top: 1em;
 			overflow: hidden;
 		}
-		#texture-img {
+		#texture-img1 {
+			width: 100%;
+			height: auto;
+		}
+		#texture-img2 {
 			width: 100%;
 			height: auto;
 		}
@@ -424,7 +448,11 @@
 			vertical-align: top;
 			margin-left: 2em;
 		}
-		#texture-img {
+		#texture-img1 {
+			width: auto;
+			height: calc( 100% - 2em );
+		}
+		#texture-img2 {
 			width: auto;
 			height: calc( 100% - 2em );
 		}
@@ -455,7 +483,9 @@
 	</div>
 	
 	<div class="control-group">
-	<img id="texture-img" />
+	<img id="texture-img1" />
+	<img id="texture-img2" />
+
 	</div>
 	</div>
 	</div>
